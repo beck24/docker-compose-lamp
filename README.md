@@ -18,6 +18,7 @@ As of now, we have several different PHP versions. Use appropriate php version a
 
 * 5.4.x
 * 5.6.x
+* 7.0.x
 * 7.1.x
 * 7.2.x
 * 7.3.x
@@ -31,7 +32,7 @@ As of now, we have several different PHP versions. Use appropriate php version a
 * Run the `docker-compose up -d`.
 
 ```shell
-git clone https://github.com/sprintcube/docker-compose-lamp.git
+git clone https://github.com/beck24/docker-compose-lamp.git
 cd docker-compose-lamp/
 cp sample.env .env
 // modify sample.env as needed
@@ -40,6 +41,12 @@ docker-compose up -d
 ```
 
 Your LAMP stack is now ready!! You can access it via `http://localhost`.
+
+If you need phpmyadmin or redis they can also be included in the stack by including their files in the up command:
+
+```shell
+docker-compose -f docker-compose.yml -f docker-compose-phpmyadmin.yml -f docker-compose-redis.yml up -d --build --remove-orphans
+```
 
 ##  Configuration and Usage
 
@@ -68,7 +75,11 @@ Define your custom `php.ini` modification to meet your requirments.
 
 _**DOCUMENT_ROOT**_
 
-It is a document root for Apache server. The default value for this is `./www`. All your sites will go here and will be synced automatically.
+It is a document root for Apache server. The default value for this is `./docroot`. All your sites will go here and will be synced automatically.
+
+_**DATA_ROOT**_
+
+A shared drive that syncs data between the host machine and the server.  Used for storing files/images that must be kept outside of the docroot.
 
 _**VHOSTS_DIR**_
 
@@ -145,11 +156,13 @@ May differ for PHP Verions <7.x.x
 
 ## phpMyAdmin
 
-phpMyAdmin is configured to run on port 8080. Use following default credentials.
+phpMyAdmin is configured to run on port 8080 by default. Use following default credentials.
 
 http://localhost:8080/  
 username: root  
 password: tiger
+
+The port can be changed in the `.env` with the variable HOST_MACHINE_PHPMYADMIN_PORT=8080
 
 ## Redis
 
@@ -167,3 +180,4 @@ In Production you should modify at a minimum the following subjects:
 
 * php handler: mod_php=> php-fpm
 * secure mysql users with proper source IP limitations
+* create a proper user with permissions, composer runs as root by default

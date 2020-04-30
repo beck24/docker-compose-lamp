@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  redis:
+    container_name: "${NAME_PREFIX}_redis"
+    image: redis:latest
+    ports:
+      - "127.0.0.1:${HOST_MACHINE_REDIS_PORT}:6379"
