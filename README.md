@@ -42,6 +42,16 @@ docker-compose up -d
 
 Your LAMP stack is now ready!! You can access it via `http://localhost`.
 
+Note: the default mysql service has been removed in favor of mysql on the host system due to performance.
+
+To connect to the host mysql use the special network value of: `host.docker.internal`
+
+Should you want to use the dockerized mysql you can include the mysql yml file:
+
+```shell
+docker-compose -f docker-compose.yml -f docker-compose-mysql.yml up -d --build --remove-orphans
+```
+
 If you need phpmyadmin or redis they can also be included in the stack by including their files in the up command:
 
 ```shell
