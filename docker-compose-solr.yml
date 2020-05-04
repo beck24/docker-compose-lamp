@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  webserver:
+    links: 
+      - solr
+  solr:
+    build:
+      context: "./bin/solr${SOLR_VERSION}"
+    container_name: "${NAME_PREFIX}_solr"
+    restart: 'always'
+    ports:
+      - "127.0.0.1:${HOST_MACHINE_SOLR_PORT}:8983"
+    volumes:
+      - ./data/solr:/var/backups
+      - ./config/solr/${SOLR_VERSION}/core:/opt/solr/server/solr/mycore
