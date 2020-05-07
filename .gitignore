@@ -6,3 +6,5 @@
 /www/**
 /docroot
 .DS_Store
+
+/data/solr/data/*
