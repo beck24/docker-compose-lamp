@@ -8,7 +8,6 @@ services:
     build:
       context: "./bin/${DATABASE}"
     container_name: "${NAME_PREFIX}_database"
-    restart: 'always'
     ports:
       - "127.0.0.1:${HOST_MACHINE_MYSQL_PORT}:3306"
     volumes: 

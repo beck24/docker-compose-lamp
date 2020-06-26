@@ -5,7 +5,6 @@ services:
     build: 
       context: ./bin/${PHPVERSION}
     container_name: "${NAME_PREFIX}_${PHPVERSION}"
-    restart: 'always'
     ports:
       # - "${HOST_MACHINE_SECURE_HOST_PORT}:443"
       - "${HOST_MACHINE_UNSECURE_HOST_PORT}:80"
